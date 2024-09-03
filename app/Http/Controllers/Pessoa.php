@@ -12,6 +12,20 @@ class Pessoa extends Controller
         return PessoaModel::listar($limite);
     }
 
+    public function porId($id)
+    {
+        $pessoa = null;
+
+        foreach ($this->listar() as $_pessoa) {
+            if ($_pessoa["id"] == $id) {
+                $pessoa = $_pessoa;
+                break;
+            }
+        }
+
+        return $pessoa ? response()->json($pessoa) : abort(404);
+    }
+
     public function cadastrar(Request $request)
     {
         $request->validate(
@@ -19,8 +33,10 @@ class Pessoa extends Controller
             "nome" => "required|min:3",
             ]
         );
+        
+        $cadastrado = PessoaModel::cadastrar($request);
 
-        if (PessoaModel::cadastrar($request)) {
+        if ($cadastrado) {
             echo "Cadastrado com sucesso!";
         } else {
             echo "Ops, falha!";

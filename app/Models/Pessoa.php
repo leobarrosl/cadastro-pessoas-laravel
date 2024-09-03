@@ -30,12 +30,16 @@ class Pessoa extends Model
 
     public static function cadastrar(Request $request)
     {
-        return self::insert([
+        $inserido = self::insertGetId([
             "nome" => $request->nome,
             "idade" => $request->idade,
             "data_nascimento" => $request->data_nascimento,
             "salario" => $request->salario,
             "hora_cadastro" => new Carbon()
         ]);
+
+        Endereco::cadastrar($request, $inserido);
+
+        return $inserido;
     }
 }

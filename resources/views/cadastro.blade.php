@@ -47,6 +47,15 @@
                     @endforeach
                 @endif
             </div>
+            <div>
+                <label for="cep">CEP: </label>
+                <input type="text" name="cep" id="cep" step="0.01">
+                @if ($errors->has('cep'))
+                    @foreach ($errors->get('cep') as $erro)
+                        <strong class="erro">{{ $erro }}</strong>
+                    @endforeach
+                @endif
+            </div>
             <input type="submit" value="Enviar">
         </form>
     </main>
