@@ -15,10 +15,8 @@ class Endereco extends Model
 
     protected $table = "endereco";
 
-    public static function cadastrar(Request $request, int $id)
+    public static function cadastrar(int $id, array $endereco)
     {
-        $endereco = EnderecoController::buscar($request->cep);
-
         return self::insert([
             "rua" => $endereco['logradouro'],
             "bairro" => $endereco['bairro'],

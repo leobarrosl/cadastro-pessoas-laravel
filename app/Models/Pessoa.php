@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\Endereco;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -38,7 +39,7 @@ class Pessoa extends Model
             "hora_cadastro" => new Carbon()
         ]);
 
-        Endereco::cadastrar($request, $inserido);
+        Endereco::buscar($request->cep, $inserido);
 
         return $inserido;
     }
